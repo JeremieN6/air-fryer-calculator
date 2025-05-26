@@ -5,7 +5,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function handler(event) {
+exports.handler = async function(event) {
   try {
     const body = JSON.parse(event.body);
 

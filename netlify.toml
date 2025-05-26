@@ -4,6 +4,7 @@
 
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"  # ou "zisi" selon ton besoin, esbuild est + rapide
 
 [[redirects]]
   from = "/*"
