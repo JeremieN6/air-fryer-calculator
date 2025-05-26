@@ -1,8 +1,6 @@
 <template>
     <section>
       <LP_Header />
-      <h1 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Fonctionnalités de
-        AirFryTime </h1>
       <LP_Features />
       <LP_Testimonials />
       <LP_FAQ />

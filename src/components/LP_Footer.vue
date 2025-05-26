@@ -79,35 +79,22 @@
                     </linearGradient>
                 </defs>
             </svg>
-            Flowbite
+            AirFryTime 🍗
         </a>
-        <p class="my-6 text-gray-500 dark:text-gray-400">Open-source library of over 400+ web components and
-            interactive elements built for better web.</p>
+        <p class="my-6 text-gray-500 dark:text-gray-400">Votre référence en cuisine facile et gourmand avec AirFryTime 🍟.</p>
         <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
             <li>
-                <a class="mr-4 hover:underline md:mr-6 ">About</a>
+                <RouterLink to="/" class="mr-4 hover:underline md:mr-6 ">Accueil</RouterLink>
             </li>
             <li>
-                <a class="mr-4 hover:underline md:mr-6">Premium</a>
+                <RouterLink to="/calculateur-cuisson-air-fryer" class="mr-4 hover:underline md:mr-6">Calculateur</RouterLink>
             </li>
             <li>
-                <a class="mr-4 hover:underline md:mr-6 ">Campaigns</a>
-            </li>
-            <li>
-                <a class="mr-4 hover:underline md:mr-6">Blog</a>
-            </li>
-            <li>
-                <a class="mr-4 hover:underline md:mr-6">Affiliate Program</a>
-            </li>
-            <li>
-                <a class="mr-4 hover:underline md:mr-6">FAQs</a>
-            </li>
-            <li>
-                <a class="mr-4 hover:underline md:mr-6">Contact</a>
+                <RouterLink to="/fonctionnalites" class="mr-4 hover:underline md:mr-6 ">Fonctionnalités</RouterLink>
             </li>
         </ul>
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2022 <a
-                class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2025 <a
+                class="hover:underline">AirFryTime™ 🍗</a>. All Rights Reserved.</span>
     </div>
 </footer>
 <!-- Footer -->

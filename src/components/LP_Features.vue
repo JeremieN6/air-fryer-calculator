@@ -5,8 +5,7 @@
             <div class="flex justify-center items-center flex-col w-full mb-8 lg:mb-16">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Fonctionnalités de
                     AirFryTime </h2>
-                <p class="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where
-                    technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+                    <p class="text-gray-500 text-center sm:text-xl dark:text-gray-400">AirFryTime vous aide à obtenir la cuisson parfaite avec votre air fryer grâce à des recommandations personnalisées selon l’aliment, son état, le poids et votre appareil.</p>
             </div>
             <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                 <div>
@@ -19,9 +18,8 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly
-                        with all the organization and hit your marketing goals every month with our marketing plan.</p>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Cuisson personnalisée</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Obtenez des recommandations de temps et température selon l’aliment, son poids et votre appareil.</p>
                 </div>
                 <div>
                     <div
@@ -33,9 +31,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-bold dark:text-white">Legal</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Protect your organization, devices and stay compliant
-                        with our structured workflows and custom permissions made for you.</p>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Compatible avec tous les air fryers</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Renseignez votre modèle ou laissez AirFryTime s’adapter automatiquement aux plus grandes marques.</p>
                 </div>
                 <div>
                     <div
@@ -50,9 +47,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-bold dark:text-white">Business Automation</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Auto-assign tasks, send Slack messages, and much more.
-                        Now power up with hundreds of new templates to help you get started.</p>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Suggestions de préparation</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Bénéficiez de conseils précis pour assaisonner, couper ou huiler vos aliments avant cuisson.</p>
                 </div>
                 <div>
                     <div
@@ -67,9 +63,8 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-bold dark:text-white">Finance</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Audit-proof software built for critical financial
-                        operations like month-end close and quarterly budgeting.</p>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Interface simple et rapide</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Remplissez un formulaire en quelques secondes et recevez instantanément le mode de cuisson idéal.</p>
                 </div>
                 <div>
                     <div
@@ -81,9 +76,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-bold dark:text-white">Enterprise Design</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both
-                        marketing and product with real cross-company collaboration.</p>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Historique de vos cuissons <i>(à venir)</i></h3>
+                    <p class="text-gray-500 dark:text-gray-400">Retrouvez vos anciens réglages pour ne jamais oublier la cuisson parfaite.</p>
                 </div>
                 <div>
                     <div
@@ -95,9 +89,8 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-bold dark:text-white">Operations</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable,
-                        iterative, and structured workflows built for all efficient teams and individual.</p>
+                    <h3 class="mb-2 text-xl font-bold dark:text-white">Optimisé pour mobile</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Consultez vos recommandations facilement depuis votre téléphone, même en cuisine.</p>
                 </div>
             </div>
         </div>
