@@ -92,6 +92,12 @@
             <li>
                 <RouterLink to="/fonctionnalites" class="mr-4 hover:underline md:mr-6 ">Fonctionnalités</RouterLink>
             </li>
+            <li>
+                <RouterLink to="/blog" class="mr-4 hover:underline md:mr-6 ">Blog</RouterLink>
+            </li>
+            <li>
+                <RouterLink to="/politique-de-confidentialite" class="mr-4 hover:underline md:mr-6 ">Politique de confidentialité</RouterLink>
+            </li>
         </ul>
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2025 <a
                 class="hover:underline">AirFryTime™ 🍗</a>. All Rights Reserved.</span>
