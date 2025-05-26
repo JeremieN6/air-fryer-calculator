@@ -4,9 +4,24 @@ import CalculateurPage from './pages/CalculateurPage.vue'
 import FonctionnalitePage from './pages/FonctionnalitePage.vue'
 
 const routes = [
-  { path: '/', component: LandingPage },
-  { path: '/calculateur-cuisson-air-fryer', component: CalculateurPage },
-  { path: '/fonctionnalites', component: FonctionnalitePage },
+  { path: '/', component: LandingPage,
+    meta: {
+      title: 'Temps de Cuisson AirFryTime 🍗',
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+    }
+   },
+  { path: '/calculateur-cuisson-air-fryer', component: CalculateurPage,
+    meta: {
+      title: 'Temps de Cuisson AirFryTime 🍗',
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+    }
+   },
+  { path: '/fonctionnalites', component: FonctionnalitePage,
+    meta: {
+      title: 'Temps de Cuisson AirFryTime 🍗',
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+    }
+   },
 ]
 
 const router = createRouter({
