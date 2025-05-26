@@ -18,7 +18,9 @@
                 Temps de cuisson à la perfection</h1>
             <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Ici chez
                 AirFryTime  nous nous focalisons sur la proposition de recette et de conseils de préparation et de
-                temps de cuission personalisés, pour maximiser votre expérience avec votre Air Fryer.</p>
+                temps de cuission personalisés, pour maximiser votre expérience avec votre Air Fryer. <br>
+                Retrouve des recettes faciles à faire avec ton Air Fryer : frites maison, poulet croustillant, légumes grillés et bien plus. Cuisine rapide, saine et sans huile avec notre sélection testée et approuvée.
+            </p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                 <a
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
