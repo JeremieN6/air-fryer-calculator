@@ -39,7 +39,7 @@
             </div>
             <div class="flex justify-center items-center mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
                 <div class="bg-[#e6e6e7] p-3 rounded-xl shadow-xl border border-[#e6e6e7] ring-gray-200">
-                    <img class="rounded-lg w-full h-auto shadow-[0px_5px_20px_0px_#718096]" src="../../public/assets/images/2151737112.jpg" alt="Image de l'Air Fryer">
+                    <img class="rounded-lg w-full h-auto shadow-[0px_5px_20px_0px_#718096]" src="/src/assets/images/2151737112.jpg" alt="Image de l'Air Fryer">
                 </div>
             </div>
             <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">

@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "cuisson-frites-parfaites",
+    "title": "Comment cuire parfaitement des frites",
+    "intro": "Découvrez les meilleures astuces pour réussir vos frites à tous les coups.",
+    "date": "27 Mai 2025",
+    "sections": [
+      {
+        "subtitle": "La bonne température",
+        "content": "Pour des frites croustillantes, il faut cuire à 180°C."
+      },
+      {
+        "subtitle": "Le choix des pommes de terre",
+        "content": "Préférez des pommes de terre farineuses comme la Bintje."
+      }
+    ]
+  },
+  {
+    "slug": "cuisson-frites-parfaites-2",
+    "title": "Comment cuire parfaitement des frites 2",
+    "intro": "Découvrez les meilleures astuces pour réussir vos frites à tous les coups.",
+    "date": "27 Mai 2025",
+    "sections": [
+      {
+        "subtitle": "La bonne température",
+        "content": "Pour des frites croustillantes, il faut cuire à 180°C."
+      },
+      {
+        "subtitle": "Le choix des pommes de terre",
+        "content": "Préférez des pommes de terre farineuses comme la Bintje."
+      }
+    ]
+  },
+  {
+    "slug": "cuisson-frites-parfaites-3",
+    "title": "Comment cuire parfaitement des frites 3",
+    "intro": "Découvrez les meilleures astuces pour réussir vos frites à tous les coups.",
+    "date": "27 Mai 2025",
+    "sections": [
+      {
+        "subtitle": "La bonne température",
+        "content": "Pour des frites croustillantes, il faut cuire à 180°C."
+      },
+      {
+        "subtitle": "Le choix des pommes de terre",
+        "content": "Préférez des pommes de terre farineuses comme la Bintje."
+      }
+    ]
+  }
+]

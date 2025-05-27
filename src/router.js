@@ -31,7 +31,7 @@ const routes = [
       description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
     }
    },
-   { path: '/blog/content', component: BlogContentPage,
+   { path: '/blog/:slug', name: 'BlogContent', component: BlogContentPage,
     meta: {
       title: 'Temps de Cuisson AirFryTime 🍗 | Blog Content',
       description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
