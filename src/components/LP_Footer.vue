@@ -102,7 +102,7 @@
             </li>
         </ul>
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2025 <a
-                class="hover:underline">AirFryTime™ 🍗</a>. All Rights Reserved.</span>
+                class="hover:underline ">AirFryTime™ 🍗</a>. <br> <br> Site web réalisé avec 💖 par <a href="https://jeremiecode.fr">SnapCode™ Agency</a> • All Rights Reserved. </span>
     </div>
 </footer>
 <!-- Footer -->
