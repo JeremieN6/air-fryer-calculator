@@ -6,7 +6,7 @@
                 <RouterLink to="/" class="flex items-center">
                     <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9"
                         alt="AirFryTime Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">AirFryTime
+                    <span class="self-center text-xl font-semibold text-gray-700 whitespace-nowrap dark:text-white">AirFryTime
                         🍗</span>
                 </RouterLink>
                 <div class="flex items-center lg:order-2">
@@ -35,7 +35,7 @@
                     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                         <li>
                             <RouterLink to="/"
-                                class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                                class="block py-2 pr-4 pl-3 text-gray-700 rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
                                 aria-current="page">Accueil</RouterLink>
                         </li>
                         <li>

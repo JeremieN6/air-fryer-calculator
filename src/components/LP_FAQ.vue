@@ -42,7 +42,7 @@
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400">Oui, les légumes congelés peuvent être cuits directement dans un air fryer sans décongélation préalable. Il suffit généralement de régler la température entre 180°C et 200°C pour 10 à 15 minutes, en remuant à mi-cuisson pour une cuisson uniforme.</p>
                     <p class="text-gray-500 dark:text-gray-400">N'hésitez pas à tester le calculateur pour obtenir non seulement le temps de cuisson mais également des conseils de préparation. 
-                        <RouterLink to="/calculateur-cuisson-air-fryer" class="font-extrabold text-primary-600 dark:text-primary-500 underline"
+                        <RouterLink to="/calculateur-cuisson-air-fryer" class="font-semibold text-primary-600 dark:text-primary-500 hover:underline"
                             target="_blank" rel="noreferrer">Cliquez ici 🥬🥕🥦</RouterLink>.</p>
                 </div>
                 <div class="mb-10">
