@@ -10,7 +10,7 @@
               </RouterLinker>
               <div class="flex items-center lg:order-2">
               <RouterLink to="/#"
-                  class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                  class="inline-flex justify-center items-center py-3 px-5 text-white font-medium text-center rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                   Contact
               </RouterLink>
                   <button data-collapse-toggle="mobile-menu-2" type="button"
