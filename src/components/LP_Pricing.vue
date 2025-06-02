@@ -84,10 +84,31 @@
                 <span>Accès aux rapports et statistiques avancées</span>
                 </li>
             </ul>
-            <a href="#" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">Essayer Pro maintenant</a>
+            <button @click="redirectToCheckout" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">Essayer Pro maintenant</button>
             </div>
         </div>
     </div>
 </section>
 <!-- Pricing -->
 </template>
+
+<script setup>
+async function redirectToCheckout() {
+  try {
+    const response = await fetch('/.netlify/functions/create-checkout-session', {
+      method: 'POST'
+    })
+    const data = await response.json()
+    console.log('Stripe response:', data)
+
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      alert("Erreur : pas de redirection reçue")
+    }
+  } catch (err) {
+    console.error('Erreur de requête :', err)
+    alert("Erreur lors de la tentative de redirection.")
+  }
+}
+</script>

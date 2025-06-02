@@ -5,6 +5,9 @@ import FonctionnalitePage from './pages/FonctionnalitePage.vue'
 import BlogPage from './pages/BlogPage.vue'
 import BlogContentPage from './pages/BlogContentPage.vue'
 import PolitiqueConfidentialitePage from './pages/PolitiqueConfidentialitePage.vue'
+import Success from './pages/stripe/Success.vue'
+import Cancel from './pages/stripe/Cancel.vue'
+
 
 const routes = [
   { path: '/', component: LandingPage,
@@ -40,6 +43,18 @@ const routes = [
    { path: '/politique-de-confidentialite', component: PolitiqueConfidentialitePage,
     meta: {
       title: 'Temps de Cuisson AirFryTime 🍗 | Politique de Confidentialité',
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+    }
+   },
+   { path: '/success', component: Success,
+    meta: {
+      title: 'Temps de Cuisson AirFryTime 🍗 | Success',
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+    }
+   },
+   { path: '/cancel', component: Cancel,
+    meta: {
+      title: 'Temps de Cuisson AirFryTime 🍗 | Cancel',
       description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
     }
    },
