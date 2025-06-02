@@ -29,5 +29,3 @@ dist-ssr
 # Env
 .env
 .env.local
-.env.development
-.env.production
