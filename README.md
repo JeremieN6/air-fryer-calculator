@@ -6,9 +6,9 @@
 - De la quantité (en grammes ou en nombre de pièces)
 - De l’état de l’aliment (cru ou congelé)
 
-## 🚀 Démo
+## 🚀 Site en ligne
 
-> Lien vers la démo en ligne (à compléter une fois déployée)
+> https://temps-cuisson-air-fryer.netlify.app
 
 ---
 

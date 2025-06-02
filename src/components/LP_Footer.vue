@@ -1,8 +1,7 @@
 <template>
     <!-- Footer -->
 <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
-    <div class="mx-auto max-w-screen-xl text-center">
-        <a class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+    <div class="mx-auto max-w-screen-xl text-center">        <RouterLink to="/" class="flex justify-center items-center text-2xl font-semibold text-gray-900 hover:text-gray-600 dark:text-white dark:hover:text-gray-300">
             <svg class="mr-2 h-8" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M25.2696 13.126C25.1955 13.6364 24.8589 14.3299 24.4728 14.9328C23.9856 15.6936 23.2125 16.2264 22.3276 16.4114L18.43 17.2265C17.8035 17.3575 17.2355 17.6853 16.8089 18.1621L14.2533 21.0188C13.773 21.5556 13.4373 21.4276 13.4373 20.7075C13.4315 20.7342 12.1689 23.9903 15.5149 25.9202C16.8005 26.6618 18.6511 26.3953 19.9367 25.6538L26.7486 21.7247C29.2961 20.2553 31.0948 17.7695 31.6926 14.892C31.7163 14.7781 31.7345 14.6639 31.7542 14.5498L25.2696 13.126Z"
@@ -80,7 +79,7 @@
                 </defs>
             </svg>
             AirFryTime 🍗
-        </a>
+        </RouterLink>
         <p class="my-6 text-gray-500 dark:text-gray-400">Votre référence en cuisine facile et gourmand avec AirFryTime 🍟.</p>
         <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
             <li>
@@ -93,6 +92,9 @@
                 <RouterLink to="/fonctionnalites" class="mr-4 hover:underline md:mr-6 ">Fonctionnalités</RouterLink>
             </li>
             <li>
+                <RouterLink to="/#a-propos" class="mr-4 hover:underline md:mr-6 ">A Propos</RouterLink>
+            </li>
+            <li>
                 <RouterLink to="/blog" class="mr-4 hover:underline md:mr-6 ">Blog</RouterLink>
             </li>
             <li>
@@ -100,7 +102,7 @@
             </li>
         </ul>
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2025 <a
-                class="hover:underline">AirFryTime™ 🍗</a>. All Rights Reserved.</span>
+                class="hover:underline ">AirFryTime™ 🍗</a>. <br> <br> Site web réalisé avec 💖 par <a href="https://jeremiecode.fr">SnapCode™ Agency</a> • All Rights Reserved. </span>
     </div>
 </footer>
 <!-- Footer -->

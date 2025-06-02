@@ -49,7 +49,7 @@
   </div>
 
   <div class="flex justify-center items-center">
-    <button type="submit" :disabled="chargement" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 cursor-pointer w-full">
+    <button type="submit" :disabled="chargement" class="inline-flex justify-center items-center py-3 px-5 font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 cursor-pointer w-full">
       {{ chargement ? 'Chargement...' : 'Calculer le temps de cuisson' }}
     </button>
   </div>
@@ -68,7 +68,7 @@
 <div v-if="resultatVisible" class="mt-10">
   <h2 class="text-2xl font-bold mb-4">Résultat</h2>
   <div class="flex flex-col md:flex-row justify-center items-start md:items-center my-5 gap-5">
-    <div class="block w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <p class="font-normal text-gray-700 dark:text-gray-400">Aliment</p>
       <div class="flex items-center justify-between">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ resultat.aliment }}</h5>
@@ -78,7 +78,7 @@
         </svg>
       </div>
     </div>
-    <div class="block w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <p class="font-normal text-gray-700 dark:text-gray-400">Temps de cuisson</p>
       <div class="flex items-center justify-between">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ resultat.temps }}</h5>
@@ -88,7 +88,7 @@
       </div>
      
     </div>
-    <div class="block w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <p class="font-normal text-gray-700 dark:text-gray-400">Température</p>
       <div class="flex items-center justify-between">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ resultat.temperature }}</h5>
