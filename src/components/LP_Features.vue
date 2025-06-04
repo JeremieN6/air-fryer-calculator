@@ -89,8 +89,8 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="mb-2 text-xl font-semibold text-gray-700 dark:text-white">Optimisé pour mobile</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Consultez vos recommandations facilement depuis votre téléphone, même en cuisine.</p>
+                    <h3 class="mb-2 text-xl font-semibold text-gray-700 dark:text-white">Suggestion de repas <i>(à venir)</i></h3>
+                    <p class="text-gray-500 dark:text-gray-400">Bénéficiez de proposition de repas à faire spécialement au air fryer, en fonction de ce que cous disposez comme aliments.</p>
                 </div>
             </div>
         </div>
