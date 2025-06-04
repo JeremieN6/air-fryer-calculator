@@ -65,7 +65,10 @@
   <span class="ml-2 text-blue-600 font-semibold">Chargement...</span>
 </div>
 
-<div v-if="resultatVisible" class="mt-10">
+<div v-if="resultatVisible" class="mt-10" ref="exportElement">
+  <div class="text-center mb-6">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Calculateur AirFryTime 🍗 • Résultat de cuisson personnalisé</h3>
+  </div>
   <h2 class="text-2xl font-bold mb-4">Résultat</h2>
   <div class="flex flex-col md:flex-row justify-center items-start md:items-center my-5 gap-5">
     <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -105,14 +108,31 @@
   </div>
 </div>
 
+<div v-if="resultatVisible" class="mt-6 flex justify-center gap-4">
+  <button
+    @click="telechargerPng"
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+  >
+    📸 Télécharger en PNG
+  </button>
+  <button
+    @click="telechargerPdf"
+    class="text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center dark:text-blue-600 dark:hover:bg-blue-700 dark:hover:text-white transition"
+  >
+    📄 Télécharger en PDF
+  </button>
+</div>
+
 <div v-if="erreur" class="mt-4 text-red-500">{{ erreur }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const aliment = ref('')
 const poids = ref('')
@@ -128,6 +148,7 @@ const resultat = ref({
   temperature: '',
   preparation: ''
 })
+const exportElement = ref(null)
 
 const envoyerRequete = async () => {
   resultatVisible.value = false
@@ -164,8 +185,66 @@ const envoyerRequete = async () => {
     chargement.value = false
   }
 }
+
+const telechargerPng = async () => {
+  const html2canvas = (await import('html2canvas')).default
+  const el = exportElement.value
+
+  el.classList.add('export-style') // ➕ ajout du style temporaire
+  await nextTick()
+
+
+  if (!el) return alert("Élément non trouvé")
+
+  const canvas = await html2canvas(el, {
+    scale: 2, // meilleure qualité
+    useCORS: true
+  })
+
+  const image = canvas.toDataURL('image/png')
+  const link = document.createElement('a')
+  link.href = image
+  link.download = 'resultat-cuisson-airfrytime.png'
+  link.click()
+
+  el.classList.remove('export-style') // ➖ suppression après capture
+}
+
+const telechargerPdf = async () => {
+  const [html2canvasModule, jsPDFModule] = await Promise.all([
+    import('html2canvas'),
+    import('jspdf')
+  ])
+  const html2canvas = html2canvasModule.default
+  const jsPDF = jsPDFModule.default
+  const el = exportElement.value
+
+  el.classList.add('export-style')
+  await nextTick()
+
+  if (!el) return alert("Élément non trouvé")
+  const canvas = await html2canvas(el, { scale: 2, useCORS: true })
+  const imgData = canvas.toDataURL('image/png')
+
+  const pdf = new jsPDF('p', 'mm', 'a4')
+  const pdfWidth = pdf.internal.pageSize.getWidth() - 20 // 10px de marge de chaque côté
+  const pdfHeight = (canvas.height * pdfWidth) / canvas.width
+
+  pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth, pdfHeight)
+  pdf.save('resultat-cuisson-airfrytime.pdf')
+
+  el.classList.remove('export-style')
+}
+
 </script>
 
 <style scoped>
-
+  .export-style {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem;
+    background: white;
+    border-radius: 0.5rem;
+  }
 </style>
