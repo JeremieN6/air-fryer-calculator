@@ -109,6 +109,12 @@
 </div>
 
 <div v-if="resultatVisible" class="mt-6 flex justify-center gap-4">
+  <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selectionnez une option</label>
+  <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option  @click="telechargerPng" value="png">📸 Télécharger en PNG</option>
+    <option @click="telechargerPdf" value="pdf"> 📄 Télécharger en PDF</option>
+    <option @click="genererEtAfficherQrCode" value="qrcode">📱 Partager le QR Code</option>
+  </select> -->
   <button
     @click="telechargerPng"
     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
@@ -121,6 +127,35 @@
   >
     📄 Télécharger en PDF
   </button>
+
+  <button
+  @click="genererEtAfficherQrCode"
+  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+>
+  📱 Partager le QR Code
+</button>
+</div>
+
+<div v-if="showQr" class="flex items-center justify-center my-5"> 
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <a href="#">
+          <img :src="qrCodeUrl" class="rounded-t-lg w-full" alt="QR Code">
+      </a>
+      <div class="p-5">
+          <a href="#">
+              <h5 class="mb-2 text-xl font-bold text-center tracking-tight text-gray-900 dark:text-white">Flashez le QR Code pour le partager</h5>
+          </a>
+          <p class="mb-3 font-normal text-center text-gray-700 dark:text-gray-400">Scan le QR Code pour partager le temps de cuisson et les conseils de préparation à ta famille et tes amis</p>
+      </div>
+      <div class="pb-5 px-5">
+        <button
+        @click="telechargerQrCode"
+         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+      >
+        📥 Télécharger le QR Code
+      </button>
+      </div>
+  </div>
 </div>
 
 <div v-if="erreur" class="mt-4 text-red-500">{{ erreur }}</div>
@@ -129,10 +164,11 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch, onMounted } from 'vue'
 
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+import QRCode from 'qrcode'
 
 const aliment = ref('')
 const poids = ref('')
@@ -148,7 +184,11 @@ const resultat = ref({
   temperature: '',
   preparation: ''
 })
+
 const exportElement = ref(null)
+
+const qrCodeUrl = ref('')
+const showQr = ref(false)
 
 const envoyerRequete = async () => {
   resultatVisible.value = false
@@ -176,6 +216,18 @@ const envoyerRequete = async () => {
     resultat.value.temps = texte.match(/Temps de cuisson\s*:\s*(.+)/)?.[1] || 'Non précisé'
     resultat.value.temperature = texte.match(/Température\s*:\s*(.+)/)?.[1] || 'Non précisée'
     resultat.value.preparation = texte.match(/Préparation\s*:\s*([\s\S]*)/)?.[1]?.replace(/---/g, '').trim() || 'Non précisée'
+
+    const baseUrl = window.location.origin + window.location.pathname
+    const qrParams = new URLSearchParams({
+      aliment: resultat.value.aliment,
+      temps: resultat.value.temps,
+      temperature: resultat.value.temperature,
+      preparation: resultat.value.preparation,
+      // Ajoute ce que tu veux afficher
+    })
+    const finalUrl = `${baseUrl}?${qrParams.toString()}`
+    qrCodeUrl.value = await QRCode.toDataURL(finalUrl)
+    showQr.value = true
 
     resultatVisible.value = true
   } catch (err) {
@@ -235,6 +287,50 @@ const telechargerPdf = async () => {
 
   el.classList.remove('export-style')
 }
+
+const telechargerQrCode = async () => {
+  try {
+    const response = await fetch(qrCodeUrl.value)
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'qr-code-airfrytime.png'
+    a.click()
+
+    URL.revokeObjectURL(url)
+  } catch (e) {
+    alert("Erreur lors du téléchargement du QR code")
+    console.error(e)
+  }
+}
+
+const genererEtAfficherQrCode = async () => {
+  const baseUrl = window.location.origin + window.location.pathname
+  const qrParams = new URLSearchParams({
+    aliment: resultat.value.aliment,
+    temps: resultat.value.temps,
+    temperature: resultat.value.temperature,
+    preparation: resultat.value.preparation
+  })
+  const finalUrl = `${baseUrl}?${qrParams.toString()}`
+  qrCodeUrl.value = await QRCode.toDataURL(finalUrl)
+  showQr.value = true
+}
+
+onMounted(() => {
+  const query = new URLSearchParams(window.location.search)
+  if (query.has('aliment')) {
+    resultatVisible.value = true
+    resultat.value = {
+      aliment: query.get('aliment') || '',
+      temps: query.get('temps') || '',
+      temperature: query.get('temperature') || '',
+      preparation: query.get('preparation') || 'Non précisée'
+    }
+  }
+})
 
 </script>
 
