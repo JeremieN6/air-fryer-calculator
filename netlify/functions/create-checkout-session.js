@@ -9,11 +9,11 @@ export async function handler(event) {
 
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: 'subscription',
+      mode: 'payment',
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1RVSxpDcigxHe4yWeeGtJNoz', // ← remplace par l'ID de ton abonnement Stripe
+          price: 'price_1RVSxpDcigxHe4yWeeGtJNoz',
           quantity: 1
         }
       ],
@@ -21,9 +21,22 @@ export async function handler(event) {
       cancel_url: 'https://temps-cuisson-air-fryer.netlify.app/cancel'
     })
 
+    const userData = JSON.parse(event.body);
+    const tokenResponse = await fetch('/.netlify/functions/createToken', {
+      method: 'POST',
+      body: JSON.stringify({
+        ua: userData.ua
+      })
+    });
+
+    const { token } = await tokenResponse.json();
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ url: session.url })
+      body: JSON.stringify({ 
+        url: session.url,
+        token: token
+      })
     }
   } catch (err) {
     console.error(err)

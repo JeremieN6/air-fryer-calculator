@@ -81,91 +81,121 @@
         </svg>
       </div>
     </div>
-    <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      <p class="font-normal text-gray-700 dark:text-gray-400">Temps de cuisson</p>
-      <div class="flex items-center justify-between">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ resultat.temps }}</h5>
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-          <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
-        </svg>
+
+      <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <p class="font-normal text-gray-700 dark:text-gray-400">Temps de cuisson</p>
+        <div class="flex items-center justify-between">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ resultat.temps }}</h5>
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+          </svg>
+        </div>
       </div>
-     
+    
+      <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <p class="font-normal text-gray-700 dark:text-gray-400">Température</p>
+        <div class="flex items-center justify-between">
+          <PremiumAuth v-slot="{ isAuthorized, handlePurchase }">
+            <h5 :class="['mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white', !isAuthorized ? 'custom-blur-premium' : '']">{{ resultat.temperature }}</h5>
+            <svg :class="['w-6 h-6 text-gray-800 dark:text-white', !isAuthorized ? 'custom-blur-premium' : '']" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"/>
+            </svg>
+          </PremiumAuth>
+        </div>
+      </div>
+  </div>
+
+  
+    <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">Préparation</h5>
+      <PremiumAuth v-slot="{ isAuthorized, handlePurchase }">
+        <p :class="['font-normal text-gray-700 dark:text-gray-400', !isAuthorized ? 'custom-blur-premium' : '']">{{ resultat.preparation }}</p>
+      </PremiumAuth>
     </div>
-    <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      <p class="font-normal text-gray-700 dark:text-gray-400">Température</p>
-      <div class="flex items-center justify-between">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ resultat.temperature }}</h5>
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-          <path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"/>
-        </svg>
-      </div>
+</div>
+
+<PremiumAuth v-slot="{ isAuthorized, handlePurchase }">
+  <div v-if="resultatVisible" :class="['mt-6 flex justify-center gap-4', !isAuthorized ? 'custom-blur-premium' : '']">
+    <button
+      @click="telechargerPng"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+    >
+      📸 Télécharger en PNG
+    </button>
+    <button
+      @click="telechargerPdf"
+      class="text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center dark:text-blue-600 dark:hover:bg-blue-700 dark:hover:text-white transition"
+    >
+      📄 Télécharger en PDF
+    </button>
+
+    <button
+      @click="genererEtAfficherQrCode"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+    >
+      📱 Partager le QR Code
+    </button>
+  </div>
+</PremiumAuth>
+
+
+<section v-if="showQr" class="bg-white dark:bg-gray-900">
+    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+        <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Flashez le QR Code pour partager les informations</h2>
+            <p class="mb-4">Partage instantanément les temps de cuisson et conseils de préparation Air Fryer avec tes proches. Scannez ce QR Code pour envoyer les infos directement à ta famille ou tes amis, que ce soit par message, mail ou réseaux sociaux. </p>
+            <p>Plus besoin de tout répéter : un scan suffit pour qu'ils aient tout sous la main, où qu'ils soient, sur tous leurs appareils. Facile, rapide, pratique, et sans perte d'infos. Un simple geste pour partager l'essentiel.</p>
+        </div>
+        <div class="flex justify-center items-center mt-8">
+          <div class="flex items-center justify-center my-5"> 
+            <PremiumAuth v-slot="{ isAuthorized, handlePurchase }">
+            <div :class="['max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700', !isAuthorized ? 'custom-blur-premium' : '']">
+                <a href="#">
+                    <img :src="qrCodeUrl" class="rounded-t-lg w-full" alt="QR Code">
+                </a>
+                <!-- <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-xl font-bold text-center tracking-tight text-gray-900 dark:text-white">Flashez le QR Code pour le partager</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-center text-gray-700 dark:text-gray-400">Scan le QR Code pour partager le temps de cuisson et les conseils de préparation à ta famille et tes amis</p>
+                </div> -->
+                <div class="p-5">
+                  <button
+                  @click="telechargerQrCode"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+                >
+                  📥 Télécharger le QR Code
+                </button>
+                </div>
+            </div>
+          </PremiumAuth>
+          </div>
+        </div>
     </div>
-  </div>
+</section>
 
-  <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">Préparation</h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400">{{ resultat.preparation }}</p>
-  </div>
-</div>
-
-<div v-if="resultatVisible" class="mt-6 flex justify-center gap-4">
-  <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selectionnez une option</label>
-  <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    <option  @click="telechargerPng" value="png">📸 Télécharger en PNG</option>
-    <option @click="telechargerPdf" value="pdf"> 📄 Télécharger en PDF</option>
-    <option @click="genererEtAfficherQrCode" value="qrcode">📱 Partager le QR Code</option>
-  </select> -->
-  <button
-    @click="telechargerPng"
-    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
-  >
-    📸 Télécharger en PNG
-  </button>
-  <button
-    @click="telechargerPdf"
-    class="text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center dark:text-blue-600 dark:hover:bg-blue-700 dark:hover:text-white transition"
-  >
-    📄 Télécharger en PDF
-  </button>
-
-  <button
-  @click="genererEtAfficherQrCode"
-  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
->
-  📱 Partager le QR Code
-</button>
-</div>
-
-<div v-if="showQr" class="flex items-center justify-center my-5"> 
-  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
-          <img :src="qrCodeUrl" class="rounded-t-lg w-full" alt="QR Code">
-      </a>
-      <div class="p-5">
-          <a href="#">
-              <h5 class="mb-2 text-xl font-bold text-center tracking-tight text-gray-900 dark:text-white">Flashez le QR Code pour le partager</h5>
-          </a>
-          <p class="mb-3 font-normal text-center text-gray-700 dark:text-gray-400">Scan le QR Code pour partager le temps de cuisson et les conseils de préparation à ta famille et tes amis</p>
-      </div>
-      <div class="pb-5 px-5">
-        <button
-        @click="telechargerQrCode"
-         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-full dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
-      >
-        📥 Télécharger le QR Code
-      </button>
-      </div>
-  </div>
-</div>
 
 <div v-if="erreur" class="mt-4 text-red-500">{{ erreur }}</div>
+
+<div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mt-8 text-center">
+  <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Débloquez toutes les fonctions premium</h3>
+  <p class="mb-4 text-gray-700 dark:text-gray-300">
+    Accédez au temps de cuisson, conseils, téléchargements et partage QR code pour 24h après paiement unique.
+  </p>
+  <button
+    @click="handlePurchase"
+    class="inline-flex items-center px-6 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
+  >
+    Débloque l'accès premium pour 0,99€
+  </button>
+</div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, nextTick, watch, onMounted } from 'vue'
-
+import PremiumAuth from './PremiumAuth.vue'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import QRCode from 'qrcode'
@@ -342,5 +372,10 @@ onMounted(() => {
     padding: 2rem 1rem;
     background: white;
     border-radius: 0.5rem;
+  }
+  .custom-blur-premium{
+    filter: blur(6px);
+    user-select: none;
+    pointer-events: none;
   }
 </style>
