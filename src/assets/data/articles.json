@@ -1,49 +1,113 @@
 [
   {
-    "slug": "cuisson-frites-parfaites",
-    "title": "Comment cuire parfaitement des frites",
-    "intro": "Découvrez les meilleures astuces pour réussir vos frites à tous les coups.",
+    "slug": "top-10-aliments-air-fryer",
+    "title": "Top 10 des aliments à cuire dans un Air Fryer",
+    "intro": "Découvrez les 10 aliments les plus populaires à cuire dans un Air Fryer pour gagner du temps, manger plus sainement et vous régaler sans huile",
     "date": "27 Mai 2025",
     "sections": [
       {
-        "subtitle": "La bonne température",
-        "content": "Pour des frites croustillantes, il faut cuire à 180°C."
+        "subtitle": "1. Les frites maison",
+        "content": "L’incontournable ! Les frites au Air Fryer sont croustillantes à l’extérieur, fondantes à l’intérieur. Coupez-les finement, ajoutez une cuillère d’huile, et faites cuire à 180°C pendant 20 à 25 minutes."
       },
       {
-        "subtitle": "Le choix des pommes de terre",
-        "content": "Préférez des pommes de terre farineuses comme la Bintje."
+        "subtitle": "2. Le poulet rôti",
+        "content": "Cuisses, pilons ou même un petit poulet entier : l’Air Fryer permet une cuisson uniforme et croustillante sans dessécher la viande. Cuisson recommandée : 190°C pendant 25 à 30 minutes (selon la taille des morceaux)."
+      },
+      {
+        "subtitle": "3. Les nuggets",
+        "content": "Faits maison ou surgelés, les nuggets ressortent dorés et croustillants sans huile. Idéal pour un snack rapide. Temps de cuisson : 200°C pendant 10 à 12 minutes."
+      },
+      {
+        "subtitle": "4. Les légumes grillés",
+        "content": "Courgettes, carottes, poivrons ou brocolis : assaisonnez-les avec un filet d’huile d’olive et des épices, puis cuisez à 180°C pendant 12 à 15 minutes. Résultat : savoureux et croquant."
+      },
+      {
+        "subtitle": "5. Le saumon",
+        "content": "Le Air Fryer permet une cuisson parfaite du saumon, avec une peau croustillante et un cœur fondant. Cuisson recommandée : 180°C pendant 10 à 12 minutes."
+      },
+      {
+        "subtitle": "6. Les pommes de terre grenaille",
+        "content": "Un accompagnement facile et savoureux : huile d’olive, herbes de Provence, sel, et hop ! 200°C pendant 15 à 20 minutes selon la taille."
+      },
+      {
+        "subtitle": "7. Les croquettes de fromage",
+        "content": "Pour une entrée gourmande : congelez vos croquettes maison avant cuisson. Puis 200°C pendant 8 à 10 minutes. Le fromage coule à peine et l’enrobage est croustillant."
+      },
+      {
+        "subtitle": "8. Les ailes de poulet",
+        "content": "Parfaites pour l’apéro ou un plateau TV : 200°C pendant 20 minutes. Pensez à les retourner à mi-cuisson pour une dorure uniforme."
+      },
+      {
+        "subtitle": "9. Les beignets de légumes",
+        "content": "Courgettes, oignons, patates douces râpées… un enrobage léger et une cuisson à 190°C pendant 12 minutes suffisent. Moins gras et plus digestes."
+      },
+      {
+        "subtitle": "10. Le pain ou les petits pains précuits",
+        "content": "Besoin d’un petit déjeuner express ? Les petits pains précuits sont prêts en 6 à 8 minutes à 180°C. Croustillant garanti sans préchauffage."
       }
     ]
   },
   {
-    "slug": "cuisson-frites-parfaites-2",
-    "title": "Comment cuire parfaitement des frites 2",
-    "intro": "Découvrez les meilleures astuces pour réussir vos frites à tous les coups.",
-    "date": "27 Mai 2025",
+    "slug": "air-fryer-guide-debutant",
+    "title": "Air Fryer : le guide du débutant",
+    "intro": "Vous venez d’acheter un Air Fryer ou vous hésitez encore ? Voici le guide ultime pour bien débuter, éviter les erreurs courantes et tirer le meilleur de votre friteuse à air chaud.",
+    "date": "30 Mai 2025",
     "sections": [
       {
-        "subtitle": "La bonne température",
-        "content": "Pour des frites croustillantes, il faut cuire à 180°C."
+        "subtitle": "Qu’est-ce qu’un Air Fryer ?",
+        "content": "Un Air Fryer, ou friteuse à air, est un appareil de cuisson qui utilise de l’air chaud circulant rapidement pour cuire les aliments. Résultat : une texture croustillante sans avoir besoin de les plonger dans l’huile."
       },
       {
-        "subtitle": "Le choix des pommes de terre",
-        "content": "Préférez des pommes de terre farineuses comme la Bintje."
+        "subtitle": "Pourquoi l’utiliser ?",
+        "content": "L’Air Fryer permet de cuisiner plus sainement, plus rapidement et sans odeur persistante. Il consomme aussi moins d’énergie qu’un four traditionnel, tout en étant plus simple à nettoyer."
+      },
+      {
+        "subtitle": "Les types d’aliments à privilégier",
+        "content": "Frites, légumes, viandes, poissons, snacks… L’Air Fryer est très polyvalent. Vous pouvez même y réchauffer des restes sans les rendre mous ou humides."
+      },
+      {
+        "subtitle": "Bien démarrer avec son Air Fryer",
+        "content": "Avant la première utilisation, nettoyez les accessoires à l’eau chaude savonneuse. Faites un premier cycle à vide pour enlever les odeurs de fabrication. Ensuite, commencez par des recettes simples comme des frites ou des nuggets pour vous familiariser."
+      },
+      {
+        "subtitle": "Conseils d’entretien",
+        "content": "Laissez toujours l’appareil refroidir avant de le nettoyer. Utilisez une éponge douce et évitez les produits abrasifs. La plupart des paniers sont compatibles lave-vaisselle, mais un lavage à la main prolonge leur durée de vie."
+      },
+      {
+        "subtitle": "Les erreurs à éviter",
+        "content": "Ne surchargez pas le panier : l’air doit bien circuler. Ne mettez jamais de papier aluminium froissé ou de plats en plastique. Évitez aussi les aliments très liquides non contenus dans un moule adapté."
+      },
+      {
+        "subtitle": "Bonus : 3 recettes simples pour commencer",
+        "content": "1. Frites maison (180°C, 20 min) – 2. Pilons de poulet marinés (190°C, 25 min) – 3. Légumes grillés (180°C, 15 min)."
       }
     ]
   },
   {
-    "slug": "cuisson-frites-parfaites-3",
-    "title": "Comment cuire parfaitement des frites 3",
-    "intro": "Découvrez les meilleures astuces pour réussir vos frites à tous les coups.",
-    "date": "27 Mai 2025",
+    "slug": "temperature-cuisson-frites",
+    "title": "Quelle température pour cuire des frites ?",
+    "intro": "Frites épaisses, allumettes ou surgelées… chaque type de frite a sa température idéale ! Découvrez comment adapter la cuisson selon vos préférences pour obtenir des frites croustillantes et dorées à souhait.",
+    "date": "9 Juin 2025",
     "sections": [
       {
-        "subtitle": "La bonne température",
-        "content": "Pour des frites croustillantes, il faut cuire à 180°C."
+        "subtitle": "La température idéale pour des frites classiques",
+        "content": "Pour des frites maison de taille standard (environ 1 cm d'épaisseur), une température de 180°C est idéale. Cela permet d’obtenir un extérieur croustillant tout en gardant un intérieur moelleux. Cuisez-les pendant 18 à 22 minutes, en les retournant à mi-cuisson."
       },
       {
-        "subtitle": "Le choix des pommes de terre",
-        "content": "Préférez des pommes de terre farineuses comme la Bintje."
+        "subtitle": "Pour les frites épaisses ou rustiques",
+        "content": "Les frites épaisses ou les frites de type rustique demandent un peu plus de temps et une température légèrement plus basse pour éviter qu’elles ne brunissent trop vite. Optez pour 170°C pendant 25 à 30 minutes, avec un préchauffage de l’Air Fryer pour garantir une cuisson uniforme."
+      },
+      {
+        "subtitle": "Pour les frites fines ou allumettes",
+        "content": "Les frites très fines (type allumettes) cuisent rapidement. Une température de 190°C pendant 10 à 15 minutes suffit souvent. Surveillez-les de près pour éviter qu’elles ne brûlent : une à deux secousses du panier durant la cuisson aident à bien les répartir."
+      },
+      {
+        "subtitle": "Et les frites surgelées ?",
+        "content": "Les frites surgelées sont souvent précuites. Une cuisson à 200°C pendant 15 à 20 minutes permet de les rendre bien dorées. Aucun besoin d’ajouter d’huile : leur enrobage contient déjà de la matière grasse."
+      },
+      {
+        "subtitle": "Quelques astuces bonus",
+        "content": "Préchauffez toujours l’Air Fryer 2 à 3 minutes avant d’y mettre les frites. N’en mettez pas trop à la fois : une couche uniforme garantit une cuisson homogène. Enfin, une touche d’huile (1 cuillère à café pour 500g) peut améliorer la texture des frites maison."
       }
     ]
   }
