@@ -1,16 +1,36 @@
 <template>
-    <slot :isAuthorized="isBypassActive.value || userHasAccess" :handlePurchase="handlePurchase"></slot>
+    <slot :isAuthorized="isAuthorized" :handlePurchase="handlePurchase"></slot>
 </template>
 
 <script setup>
 import { isBypassActive, syncBypassFromStorage } from '../stores/bypass'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 const userHasAccess = ref(false)
 
+// Computed pour la logique d'autorisation
+const isAuthorized = computed(() => {
+  const bypassActive = isBypassActive.value;
+  const hasAccess = userHasAccess.value;
+  // console.log('PremiumAuth - Bypass actif:', bypassActive, 'User has access:', hasAccess);
+  return bypassActive || hasAccess;
+});
+
+// Watcher pour débugger les changements
+watch(isBypassActive, (newValue) => {
+  // console.log('PremiumAuth - isBypassActive changed to:', newValue);
+}, { immediate: true });
+
+watch(isAuthorized, (newValue) => {
+  // console.log('PremiumAuth - isAuthorized changed to:', newValue);
+}, { immediate: true });
+
 async function checkAuthorization() {
   const token = sessionStorage.getItem('premiumToken');
-  if (!token) return;
+  if (!token) {
+    // console.log('PremiumAuth - No token found');
+    return;
+  }
   try {
     const response = await fetch('/.netlify/functions/verifyToken', {
       method: 'POST',
@@ -21,16 +41,20 @@ async function checkAuthorization() {
     });
     const { authorized } = await response.json();
     userHasAccess.value = authorized;
+    // console.log('PremiumAuth - Token verification result:', authorized);
   } catch (error) {
+    // console.log('PremiumAuth - Token verification error:', error);
     userHasAccess.value = false;
   }
 }
 
 function handleStorageEvent() {
+  // console.log('PremiumAuth - Storage event detected, syncing bypass');
   syncBypassFromStorage();
 }
 
 onMounted(() => {
+  // console.log('PremiumAuth - Component mounted');
   syncBypassFromStorage();
   window.addEventListener('storage', handleStorageEvent);
   checkAuthorization();
@@ -55,8 +79,6 @@ async function handlePurchase() {
     alert('Erreur lors de la création de la session Stripe');
   }
 }
-
-console.log('isBypassActive', isBypassActive.value)
 </script>
 
 <style scoped>

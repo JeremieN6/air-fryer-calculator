@@ -32,3 +32,6 @@ dist-ssr
 
 # Local file
 tokens.json
+
+# Folder for generated files about issues fixed
+bugsFixed

@@ -353,8 +353,16 @@ const genererEtAfficherQrCode = async () => {
 }
 
 onMounted(() => {
+  // console.log('CuissonForm - Component mounted, syncing bypass state');
   syncBypassFromStorage()
   window.addEventListener('storage', syncBypassFromStorage)
+
+  // Forcer une synchronisation après un délai pour s'assurer que l'état est correct
+  setTimeout(() => {
+    syncBypassFromStorage();
+    // console.log('CuissonForm - Delayed sync completed');
+  }, 100);
+
   const query = new URLSearchParams(window.location.search)
   if (query.has('aliment')) {
     resultatVisible.value = true
