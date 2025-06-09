@@ -1,5 +1,4 @@
 import Stripe from 'stripe'
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 export async function handler(event) {
@@ -13,30 +12,19 @@ export async function handler(event) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1RVSxpDcigxHe4yWeeGtJNoz',
+          price: 'price_1RY1KHDcigxHe4yWLi8bfy2r',
           quantity: 1
         }
       ],
-      success_url: 'https://temps-cuisson-air-fryer.netlify.app/success',
-      cancel_url: 'https://temps-cuisson-air-fryer.netlify.app/cancel'
+      // success_url: 'https://temps-cuisson-air-fryer.netlify.app/success',
+      // cancel_url: 'https://temps-cuisson-air-fryer.netlify.app/cancel'
+      success_url: 'http://localhost:8888/success',
+      cancel_url: 'http://localhost:8888/cancel'
     })
-
-    const userData = JSON.parse(event.body);
-    const tokenResponse = await fetch('/.netlify/functions/createToken', {
-      method: 'POST',
-      body: JSON.stringify({
-        ua: userData.ua
-      })
-    });
-
-    const { token } = await tokenResponse.json();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
-        url: session.url,
-        token: token
-      })
+      body: JSON.stringify({ url: session.url })
     }
   } catch (err) {
     console.error(err)
