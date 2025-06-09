@@ -11,8 +11,8 @@
 
 <script setup>
 import { RouterView } from 'vue-router'
-import { ref } from 'vue'
-import { isBypassActive } from './stores/bypass';
+import { ref, onMounted , onUnmounted } from 'vue'
+import { isBypassActive, syncBypassFromStorage } from './stores/bypass';
 
 const isDarkMode = ref(false)
 
