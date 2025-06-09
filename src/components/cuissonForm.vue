@@ -196,11 +196,12 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted } from 'vue'
+import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
 import PremiumAuth from './PremiumAuth.vue'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import QRCode from 'qrcode'
+import { syncBypassFromStorage } from '../stores/bypass'
 
 const aliment = ref('')
 const poids = ref('')
@@ -352,6 +353,8 @@ const genererEtAfficherQrCode = async () => {
 }
 
 onMounted(() => {
+  syncBypassFromStorage()
+  window.addEventListener('storage', syncBypassFromStorage)
   const query = new URLSearchParams(window.location.search)
   if (query.has('aliment')) {
     resultatVisible.value = true
@@ -362,6 +365,10 @@ onMounted(() => {
       preparation: query.get('preparation') || 'Non précisée'
     }
   }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('storage', syncBypassFromStorage)
 })
 
 </script>

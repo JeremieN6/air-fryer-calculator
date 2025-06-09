@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from './pages/LandingPage.vue'
 import CalculateurPage from './pages/CalculateurPage.vue'
+import BypassPage from './pages/BypassPage.vue';
 import FonctionnalitePage from './pages/FonctionnalitePage.vue'
 import BlogPage from './pages/BlogPage.vue'
 import BlogContentPage from './pages/BlogContentPage.vue'
@@ -64,5 +65,17 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+if (import.meta.env.VITE_ENABLE_BYPASS === 'true') {
+  router.addRoute({
+    path: '/calculateur-cuisson-air-fryer/bypass-mode',
+    name: 'Bypass',
+    component: BypassPage,
+    meta: {
+      title: 'Temps de Cuisson AirFryTime 🍗 | Calculateur Admin',
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+    }
+  });
+}
 
 export default router

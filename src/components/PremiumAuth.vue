@@ -1,51 +1,62 @@
 <template>
-  <slot :isAuthorized="isAuthorized" :handlePurchase="handlePurchase"></slot>
+    <slot :isAuthorized="isBypassActive.value || userHasAccess" :handlePurchase="handlePurchase"></slot>
 </template>
 
-<script>
-export default {
-  name: 'PremiumAuth',
-  data() {
-    return { isAuthorized: false }
-  },
-  async created() {
-    await this.checkAuthorization();
-  },
-  methods: {
-    async checkAuthorization() {
-      const token = sessionStorage.getItem('premiumToken');
-      if (!token) return;
-      try {
-        const response = await fetch('/.netlify/functions/verifyToken', {
-          method: 'POST',
-          body: JSON.stringify({
-            token,
-            ua: navigator.userAgent
-          })
-        });
-        const { authorized } = await response.json();
-        this.isAuthorized = authorized;
-      } catch (error) {
-        this.isAuthorized = false;
-      }
-    },
-    async handlePurchase() {
-      try {
-        const response = await fetch('/.netlify/functions/create-checkout-session', {
-          method: 'POST',
-          body: JSON.stringify({
-            ua: navigator.userAgent
-          })
-        });
-        const { url, token } = await response.json();
-        if (token) sessionStorage.setItem('premiumToken', token);
-        window.location.href = url;
-      } catch (error) {
-        alert('Erreur lors de la création de la session Stripe');
-      }
-    }
+<script setup>
+import { isBypassActive, syncBypassFromStorage } from '../stores/bypass'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const userHasAccess = ref(false)
+
+async function checkAuthorization() {
+  const token = sessionStorage.getItem('premiumToken');
+  if (!token) return;
+  try {
+    const response = await fetch('/.netlify/functions/verifyToken', {
+      method: 'POST',
+      body: JSON.stringify({
+        token,
+        ua: navigator.userAgent
+      })
+    });
+    const { authorized } = await response.json();
+    userHasAccess.value = authorized;
+  } catch (error) {
+    userHasAccess.value = false;
   }
 }
+
+function handleStorageEvent() {
+  syncBypassFromStorage();
+}
+
+onMounted(() => {
+  syncBypassFromStorage();
+  window.addEventListener('storage', handleStorageEvent);
+  checkAuthorization();
+});
+
+onUnmounted(() => {
+  window.removeEventListener('storage', handleStorageEvent);
+});
+
+async function handlePurchase() {
+  try {
+    const response = await fetch('/.netlify/functions/create-checkout-session', {
+      method: 'POST',
+      body: JSON.stringify({
+        ua: navigator.userAgent
+      })
+    });
+    const { url, token } = await response.json();
+    if (token) sessionStorage.setItem('premiumToken', token);
+    window.location.href = url;
+  } catch (error) {
+    alert('Erreur lors de la création de la session Stripe');
+  }
+}
+
+console.log('isBypassActive', isBypassActive.value)
 </script>
 
 <style scoped>
