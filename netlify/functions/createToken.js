@@ -38,10 +38,26 @@ async function saveToken(token, userData) {
 }
 
 exports.handler = async function(event) {
+    const headers = {
+    'Access-Control-Allow-Origin': 'https://sassify.fr', // remplacer le domaine par ->  event.headers.origin || '*'  pour autoriser tous les domaines
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+
+    if (event.httpMethod === 'OPTIONS') {
+    // Réponse aux preflight CORS
+    return {
+      statusCode: 200,
+      headers,
+      body: 'Preflight CORS ok',
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: 'Méthode non autorisée' })
+      headers,
+      body: JSON.stringify({ error: 'Méthode non autorisée' }),
     };
   }
 

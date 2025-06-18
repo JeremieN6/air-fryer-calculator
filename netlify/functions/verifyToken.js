@@ -3,7 +3,7 @@ const path = require('path');
 
 async function verifyToken(token, userData) {
   const tokensPath = path.join(__dirname, '.netlify', 'tokens.json');
-  
+
   try {
     // Lire le fichier des tokens
     const data = await fs.readFile(tokensPath, 'utf8');
@@ -41,20 +41,39 @@ async function verifyToken(token, userData) {
   }
 }
 
-exports.handler = async function(event) {
+exports.handler = async function (event) {
+  // Gérer la pré-requête OPTIONS (préflight)
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://sassify.fr', // remplacer le domaine par ->  event.headers.origin || '*'  pour autoriser tous les domaines
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+      body: '',
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: 'Méthode non autorisée' })
+      headers: {
+        'Access-Control-Allow-Origin': 'https://sassify.fr',
+      },
+      body: JSON.stringify({ error: 'Méthode non autorisée' }),
     };
   }
 
   try {
     const { token, ua, ip } = JSON.parse(event.body);
-    
+
     if (!token || !ua) {
       return {
         statusCode: 400,
+        headers: {
+          'Access-Control-Allow-Origin': 'https://sassify.fr',
+        },
         body: JSON.stringify({ error: 'Token et User-Agent requis' })
       };
     }
@@ -66,12 +85,18 @@ exports.handler = async function(event) {
 
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://sassify.fr',
+      },
       body: JSON.stringify({ authorized: isValid })
     };
   } catch (error) {
     console.error('Erreur:', error);
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://sassify.fr',
+      },
       body: JSON.stringify({ error: 'Erreur lors de la vérification du token' })
     };
   }
