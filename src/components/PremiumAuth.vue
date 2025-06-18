@@ -32,7 +32,7 @@ async function checkAuthorization() {
     return;
   }
   try {
-    const response = await fetch('/.netlify/functions/verifyToken', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}verifyToken `, {
       method: 'POST',
       body: JSON.stringify({
         token,
@@ -66,7 +66,7 @@ onUnmounted(() => {
 
 async function handlePurchase() {
   try {
-    const response = await fetch('/.netlify/functions/create-checkout-session', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}create-checkout-session`, {
       method: 'POST',
       body: JSON.stringify({
         ua: navigator.userAgent

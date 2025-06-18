@@ -19,7 +19,7 @@ const router = useRouter()
 
 onMounted(async () => {
   try {
-    const response = await fetch('/.netlify/functions/createToken', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}createToken`, {
       method: 'POST',
       body: JSON.stringify({
         ua: navigator.userAgent

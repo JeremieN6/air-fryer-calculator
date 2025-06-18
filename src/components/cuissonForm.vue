@@ -228,7 +228,7 @@ const envoyerRequete = async () => {
   chargement.value = true
 
   try {
-    const response = await fetch('/.netlify/functions/cuisson', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}cuisson`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

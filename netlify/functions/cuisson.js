@@ -6,6 +6,18 @@ const openai = new OpenAI({
 });
 
 exports.handler = async function(event) {
+  // Gestion des pré-requêtes CORS (OPTIONS)
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "https://sassify.fr",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+      body: "",
+    };
+  }
   try {
     const body = JSON.parse(event.body);
 
@@ -20,16 +32,16 @@ exports.handler = async function(event) {
     // Construction d'une chaîne pour inclure poids et/ou quantité dans le prompt
     let poidsOuQuantite = "";
     if (poids && String(poids).trim() !== "") {
-        poidsOuQuantite += ` - Poids : ${poids}`;
+      poidsOuQuantite += ` - Poids : ${poids}`;
     }
     if (quantite && String(quantite).trim() !== "") {
-        // Ajoutez une virgule si le poids était aussi spécifié
-        if (poidsOuQuantite !== "") poidsOuQuantite += ", ";
-        poidsOuQuantite += ` - Quantité : ${quantite}`;
+      // Ajoutez une virgule si le poids était aussi spécifié
+      if (poidsOuQuantite !== "") poidsOuQuantite += ", ";
+      poidsOuQuantite += ` - Quantité : ${quantite}`;
     }
     // Si ni poids ni quantité n'est spécifié, l'IA devra peut-être faire une estimation basée sur l'aliment seul.
     if (poidsOuQuantite === "") {
-          poidsOuQuantite = " - Poids ou Quantité : non spécifié(s)";
+      poidsOuQuantite = " - Poids ou Quantité : non spécifié(s)";
     }
 
     const prompt = `
@@ -60,15 +72,23 @@ exports.handler = async function(event) {
     });
 
     const result = completion.choices[0].message.content;
-    
+
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "https://sassify.fr",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({ result }),
     };
   } catch (error) {
     console.error("Erreur OpenAI :", error.message);
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "https://sassify.fr",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({ error: "Erreur serveur" }),
     };
   }
