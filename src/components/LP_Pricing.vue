@@ -95,7 +95,7 @@
 <script setup>
 async function redirectToCheckout() {
   try {
-    const response = await fetch('/.netlify/functions/create-checkout-session', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}create-checkout-session`, {
       method: 'POST'
     })
     const data = await response.json()
