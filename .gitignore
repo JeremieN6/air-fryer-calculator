@@ -29,6 +29,8 @@ dist-ssr
 # Env
 .env
 .env.local
+.env.production
+.env.developement
 
 # Local file
 tokens.json
