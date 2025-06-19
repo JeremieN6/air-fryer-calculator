@@ -1,9 +1,17 @@
-import Stripe from 'stripe'
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function handler(event) {
-    const headers = {
-    'Access-Control-Allow-Origin': 'https://sassify.fr', // remplacer le domaine par ->  event.headers.origin || '*'  pour autoriser tous les domaines
+  const allowedOrigins = [
+    'https://sassify.fr',
+    'https://temps-cuisson-air-fryer.netlify.app'
+  ];
+
+  const origin = event.headers.origin;
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : 'null';
+
+  const headers = {
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
@@ -26,27 +34,25 @@ export async function handler(event) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1RY1KHDcigxHe4yWLi8bfy2r',
+          price: 'price_1RY1KHDcigxHe4yWLi8bfy2r', // à remplacer par ton vrai prix Stripe
           quantity: 1
         }
       ],
       success_url: 'https://temps-cuisson-air-fryer.netlify.app/success',
       cancel_url: 'https://temps-cuisson-air-fryer.netlify.app/cancel'
-      // success_url: 'http://localhost:8888/success',
-      // cancel_url: 'http://localhost:8888/cancel'
-    })
+    });
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ url: session.url })
-    }
+    };
   } catch (err) {
-    console.error(err)
+    console.error(err);
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ error: err.message })
-    }
+    };
   }
 }

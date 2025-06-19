@@ -5,19 +5,35 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Liste blanche des domaines autorisés
+const allowedOrigins = [
+  "https://sassify.fr",
+  "https://temps-cuisson-air-fryer.netlify.app"
+];
+
 exports.handler = async function(event) {
+  const origin = event.headers.origin;
+
   // Gestion des pré-requêtes CORS (OPTIONS)
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "https://sassify.fr",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-      body: "",
-    };
+    if (allowedOrigins.includes(origin)) {
+      return {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": origin,
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+        body: "",
+      };
+    } else {
+      return {
+        statusCode: 403,
+        body: "Origin non autorisée",
+      };
+    }
   }
+
   try {
     const body = JSON.parse(event.body);
 
@@ -29,20 +45,13 @@ exports.handler = async function(event) {
     const typeCuisson = String(body.typeCuisson || "").trim();
     const modele = String(body.modele || "").trim();
 
-    // Construction d'une chaîne pour inclure poids et/ou quantité dans le prompt
     let poidsOuQuantite = "";
-    if (poids && String(poids).trim() !== "") {
-      poidsOuQuantite += ` - Poids : ${poids}`;
-    }
-    if (quantite && String(quantite).trim() !== "") {
-      // Ajoutez une virgule si le poids était aussi spécifié
+    if (poids) poidsOuQuantite += ` - Poids : ${poids}`;
+    if (quantite) {
       if (poidsOuQuantite !== "") poidsOuQuantite += ", ";
       poidsOuQuantite += ` - Quantité : ${quantite}`;
     }
-    // Si ni poids ni quantité n'est spécifié, l'IA devra peut-être faire une estimation basée sur l'aliment seul.
-    if (poidsOuQuantite === "") {
-      poidsOuQuantite = " - Poids ou Quantité : non spécifié(s)";
-    }
+    if (!poidsOuQuantite) poidsOuQuantite = " - Poids ou Quantité : non spécifié(s)";
 
     const prompt = `
         Tu es un expert en cuisson avec un air fryer. Voici les caractéristiques :
@@ -60,7 +69,7 @@ exports.handler = async function(event) {
         Température : XXX°C
         Préparation : ...
         ---
-        `;
+    `;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -76,7 +85,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://sassify.fr",
+        "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : "",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ result }),
@@ -86,7 +95,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": "https://sassify.fr",
+        "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : "",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: "Erreur serveur" }),

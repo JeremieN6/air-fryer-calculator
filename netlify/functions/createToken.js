@@ -12,7 +12,6 @@ async function saveToken(token, userData) {
   const tokensPath = path.join(__dirname, '.netlify', 'tokens.json');
   
   try {
-    // Lire le fichier existant ou créer un nouvel objet
     let tokens = {};
     try {
       const data = await fs.readFile(tokensPath, 'utf8');
@@ -21,14 +20,12 @@ async function saveToken(token, userData) {
       // Le fichier n'existe pas encore, on continue avec un objet vide
     }
 
-    // Ajouter le nouveau token
     tokens[token] = {
       ua: userData.ua,
       ip: userData.ip,
       exp: Date.now() + (24 * 60 * 60 * 1000) // 24 heures
     };
 
-    // Sauvegarder le fichier
     await fs.writeFile(tokensPath, JSON.stringify(tokens, null, 2));
     return true;
   } catch (error) {
@@ -38,14 +35,21 @@ async function saveToken(token, userData) {
 }
 
 exports.handler = async function(event) {
-    const headers = {
-    'Access-Control-Allow-Origin': 'https://sassify.fr', // remplacer le domaine par ->  event.headers.origin || '*'  pour autoriser tous les domaines
+  const allowedOrigins = [
+    'https://sassify.fr',
+    'https://temps-cuisson-air-fryer.netlify.app'
+  ];
+
+  const origin = event.headers.origin;
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : 'null';
+
+  const headers = {
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 
-    if (event.httpMethod === 'OPTIONS') {
-    // Réponse aux preflight CORS
+  if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers,
@@ -76,13 +80,15 @@ exports.handler = async function(event) {
 
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify({ token })
     };
   } catch (error) {
     console.error('Erreur:', error);
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: 'Erreur lors de la création du token' })
     };
   }
-}; 
+};

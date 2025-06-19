@@ -5,31 +5,25 @@ async function verifyToken(token, userData) {
   const tokensPath = path.join(__dirname, '.netlify', 'tokens.json');
 
   try {
-    // Lire le fichier des tokens
     const data = await fs.readFile(tokensPath, 'utf8');
     const tokens = JSON.parse(data);
 
-    // Vérifier si le token existe
     if (!tokens[token]) {
       return false;
     }
 
     const tokenData = tokens[token];
 
-    // Vérifier l'expiration
     if (Date.now() > tokenData.exp) {
-      // Supprimer le token expiré
       delete tokens[token];
       await fs.writeFile(tokensPath, JSON.stringify(tokens, null, 2));
       return false;
     }
 
-    // Vérifier le User-Agent
     if (tokenData.ua !== userData.ua) {
       return false;
     }
 
-    // Vérifier l'IP si disponible
     if (userData.ip && tokenData.ip !== 'unknown' && tokenData.ip !== userData.ip) {
       return false;
     }
@@ -42,15 +36,24 @@ async function verifyToken(token, userData) {
 }
 
 exports.handler = async function (event) {
-  // Gérer la pré-requête OPTIONS (préflight)
+  const allowedOrigins = [
+    'https://sassify.fr',
+    'https://temps-cuisson-air-fryer.netlify.app'
+  ];
+  const origin = event.headers.origin;
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : 'null';
+
+  const headers = {
+    'Access-Control-Allow-Origin': corsOrigin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
+  // OPTIONS (preflight CORS)
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://sassify.fr', // remplacer le domaine par ->  event.headers.origin || '*'  pour autoriser tous les domaines
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
+      headers,
       body: '',
     };
   }
@@ -58,9 +61,7 @@ exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://sassify.fr',
-      },
+      headers,
       body: JSON.stringify({ error: 'Méthode non autorisée' }),
     };
   }
@@ -71,10 +72,8 @@ exports.handler = async function (event) {
     if (!token || !ua) {
       return {
         statusCode: 400,
-        headers: {
-          'Access-Control-Allow-Origin': 'https://sassify.fr',
-        },
-        body: JSON.stringify({ error: 'Token et User-Agent requis' })
+        headers,
+        body: JSON.stringify({ error: 'Token et User-Agent requis' }),
       };
     }
 
@@ -85,19 +84,15 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://sassify.fr',
-      },
-      body: JSON.stringify({ authorized: isValid })
+      headers,
+      body: JSON.stringify({ authorized: isValid }),
     };
   } catch (error) {
     console.error('Erreur:', error);
     return {
       statusCode: 500,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://sassify.fr',
-      },
-      body: JSON.stringify({ error: 'Erreur lors de la vérification du token' })
+      headers,
+      body: JSON.stringify({ error: 'Erreur lors de la vérification du token' }),
     };
   }
-}; 
+};
