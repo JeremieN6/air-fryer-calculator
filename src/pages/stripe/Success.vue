@@ -18,8 +18,9 @@ const error = ref('')
 const router = useRouter()
 
 onMounted(async () => {
+    const apiBaseUrl = import.meta.env.VITE_API_URL || '/.netlify/functions/'
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}createToken`, {
+    const response = await fetch(`${apiBaseUrl}createToken`, {
       method: 'POST',
       body: JSON.stringify({
         ua: navigator.userAgent

@@ -26,13 +26,14 @@ watch(isAuthorized, (newValue) => {
 }, { immediate: true });
 
 async function checkAuthorization() {
+  const apiBaseUrl = import.meta.env.VITE_API_URL || '/.netlify/functions/'
   const token = sessionStorage.getItem('premiumToken');
   if (!token) {
     // console.log('PremiumAuth - No token found');
     return;
   }
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}verifyToken `, {
+    const response = await fetch(`${apiBaseUrl}verifyToken `, {
       method: 'POST',
       body: JSON.stringify({
         token,
@@ -65,8 +66,9 @@ onUnmounted(() => {
 });
 
 async function handlePurchase() {
+  const apiBaseUrl = import.meta.env.VITE_API_URL || '/.netlify/functions/'
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}create-checkout-session`, {
+    const response = await fetch(`${apiBaseUrl}create-checkout-session`, {
       method: 'POST',
       body: JSON.stringify({
         ua: navigator.userAgent
