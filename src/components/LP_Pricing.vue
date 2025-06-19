@@ -49,8 +49,8 @@
             <h3 class="mb-4 text-2xl font-semibold">Pro</h3>
             <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Idéal pour les professionnels avec des besoins avancés et un support premium.</p>
             <div class="flex justify-center items-baseline my-8">
-                <span class="mr-2 text-5xl font-extrabold">4,99€</span>
-                <span class="text-gray-500 dark:text-gray-400">/ mois</span>
+                <span class="mr-2 text-5xl font-extrabold">0,99€</span>
+                <!-- <span class="text-gray-500 dark:text-gray-400">/ mois</span> -->
             </div>
             <ul role="list" class="mb-8 space-y-4 text-left">
                 <li class="flex items-center space-x-3">
