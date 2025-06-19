@@ -43,9 +43,21 @@
     </select>
   </div>
 
-  <div>
+  <div class="mb-5">
     <label class="block mb-2 text-sm font-medium text-left text-gray-900 dark:text-white">Modèle d'air fryer (facultatif)</label>
-    <input v-model="modele" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex : Cosori, Ninja..." />
+    <select v-model="modele" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option value="">-- Sélectionnez une marque --</option>
+      <option>Philips</option>
+      <option>Tefal</option>
+      <option>Ninja</option>
+      <option>Cosori</option>
+      <option>Instant Pot</option>
+      <option>De’Longhi</option>
+      <option>Moulinex</option>
+      <option>KitchenAid</option>
+      <option>Cuisinart</option>
+      <option>Autre</option>
+    </select>
   </div>
 
   <div class="flex justify-center items-center">
