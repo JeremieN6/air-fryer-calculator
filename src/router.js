@@ -66,6 +66,7 @@ const router = createRouter({
   routes
 })
 
+// Route bypass toujours disponible mais cachée - accès uniquement via URL directe
 if (import.meta.env.VITE_ENABLE_BYPASS === 'true') {
   router.addRoute({
     path: '/calculateur-cuisson-air-fryer/bypass-mode',
@@ -73,7 +74,8 @@ if (import.meta.env.VITE_ENABLE_BYPASS === 'true') {
     component: BypassPage,
     meta: {
       title: 'Temps de Cuisson AirFryTime 🍗 | Calculateur Admin',
-      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.'
+      description: 'Obtenez instantanément le temps et la température de cuisson de vos aliments au air fryer grâce à notre IA.',
+      hidden: true // Marquer comme cachée pour référence future
     }
   });
 }

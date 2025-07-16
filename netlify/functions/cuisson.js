@@ -11,16 +11,44 @@ const allowedOrigins = [
   "https://temps-cuisson-air-fryer.netlify.app"
 ];
 
+// Fonction pour vérifier si l'origine est autorisée
+function isOriginAllowed(origin, referer) {
+  // Vérifier l'origin d'abord
+  if (origin && allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  // Si pas d'origin (cas mobile), vérifier le referer
+  if (referer) {
+    return allowedOrigins.some(allowedOrigin =>
+      referer.startsWith(allowedOrigin)
+    );
+  }
+
+  // Fallback : autoriser si pas d'origin ni referer (certains cas mobiles)
+  return !origin && !referer;
+}
+
 exports.handler = async function(event) {
   const origin = event.headers.origin;
+  const referer = event.headers.referer;
+
+  // Logging pour débugger les problèmes mobiles
+  console.log('Request details:', {
+    method: event.httpMethod,
+    origin: origin,
+    referer: referer,
+    userAgent: event.headers['user-agent'],
+    isOriginAllowed: isOriginAllowed(origin, referer)
+  });
 
   // Gestion des pré-requêtes CORS (OPTIONS)
   if (event.httpMethod === "OPTIONS") {
-    if (allowedOrigins.includes(origin)) {
+    if (isOriginAllowed(origin, referer)) {
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin": origin,
+          "Access-Control-Allow-Origin": origin || "*",
           "Access-Control-Allow-Methods": "POST, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type",
         },
@@ -85,7 +113,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : "",
+        "Access-Control-Allow-Origin": isOriginAllowed(origin, referer) ? (origin || "*") : "",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ result }),
@@ -95,7 +123,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : "",
+        "Access-Control-Allow-Origin": isOriginAllowed(origin, referer) ? (origin || "*") : "",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: "Erreur serveur" }),

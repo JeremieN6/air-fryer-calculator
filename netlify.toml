@@ -13,3 +13,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  VITE_ENABLE_BYPASS = "true"
+  VITE_SHOW_BYPASS_LINK = "false"  # Contrôle l'affichage du lien dans le menu
+  VITE_BYPASS_ALLOWED_CODES = "rapitrapat0797,code1234"
+  VITE_BASE_PATH = "/"

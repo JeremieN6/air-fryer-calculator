@@ -3,8 +3,9 @@
     <div class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-sm p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
       <form class="space-y-6" @submit.prevent="checkCode">
         <div class="text-center">
-          <h5 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">🔓 Mode Développeur</h5>
-          <p class="text-gray-600 dark:text-gray-400">Entrez le code d'accès pour débloquer toutes les fonctionnalités</p>
+          <h5 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">🔓 Accès Développeur</h5>
+          <p class="text-gray-600 dark:text-gray-400">Accès réservé - Entrez le code pour débloquer toutes les fonctionnalités</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500 mt-2">Cette page n'est accessible que via URL directe</p>
         </div>
 
         <div>
@@ -38,8 +39,11 @@
 
         <!-- Debug info en mode développement -->
         <div v-if="showDebug" class="mt-4 p-3 text-xs text-gray-500 bg-gray-50 border border-gray-200 rounded-lg dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600">
-          <!-- <p><strong>Codes autorisés :</strong> {{ allowedCodes.join(', ') }}</p> -->
+          <p><strong>Codes autorisés :</strong> {{ allowedCodes.join(', ') }}</p>
           <p><strong>Bypass activé :</strong> {{ isBypassActive ? '✅ Oui déjà activé' : '❌Non, pas activé' }}</p>
+          <p><strong>VITE_ENABLE_BYPASS :</strong> {{ import.meta.env.VITE_ENABLE_BYPASS }}</p>
+          <p><strong>BASE_URL :</strong> {{ import.meta.env.BASE_URL }}</p>
+          <p><strong>Mode :</strong> {{ import.meta.env.MODE }}</p>
         </div>
       </form>
     </div>
@@ -108,6 +112,20 @@ function checkCode() {
 
 // Vérifier si le bypass est déjà actif au chargement
 onMounted(() => {
+  // Vérification de sécurité : rediriger si bypass non activé dans l'environnement
+  if (import.meta.env.VITE_ENABLE_BYPASS !== 'true') {
+    console.warn('Tentative d\'accès à la page bypass sans autorisation');
+    router.push('/');
+    return;
+  }
+
+  // Log de l'accès à la page (pour monitoring)
+  console.log('Accès à la page bypass détecté', {
+    timestamp: new Date().toISOString(),
+    userAgent: navigator.userAgent,
+    referrer: document.referrer
+  });
+
   if (isBypassActive.value) {
     success.value = true;
     setTimeout(() => {

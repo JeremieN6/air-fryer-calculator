@@ -38,3 +38,7 @@ tokens.json
 
 # Folder for generated files about issues fixed
 bugsFixed
+
+# Scripts de déploiement avec secrets
+deploy-*.sh
+*.deploy.sh

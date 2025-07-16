@@ -58,12 +58,7 @@
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                                 Blog</RouterLink>
                         </li>
-                        <!-- Lien de bypass visible seulement en mode développement -->
-                        <li v-if="showBypassLink">
-                            <RouterLink to="/calculateur-cuisson-air-fryer/bypass-mode"
-                                class="block py-2 pr-4 pl-3 text-yellow-600 border-b border-gray-100 hover:bg-yellow-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-yellow-700 lg:p-0 dark:text-yellow-400 lg:dark:hover:text-yellow-300 dark:hover:bg-gray-700 dark:hover:text-yellow-300 lg:dark:hover:bg-transparent dark:border-gray-700 font-medium">
-                                🔐 Admin</RouterLink>
-                        </li>
+                        <!-- Lien de bypass supprimé - accès uniquement via URL directe -->
                     </ul>
                 </div>
             </div>
@@ -82,8 +77,5 @@ const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value
 }
 
-// Afficher le lien de bypass seulement si activé dans les variables d'environnement
-const showBypassLink = computed(() => {
-    return import.meta.env.VITE_ENABLE_BYPASS === 'true'
-})
+// Lien de bypass supprimé du menu - accès uniquement via URL directe
 </script>
