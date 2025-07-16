@@ -41,9 +41,9 @@
         <div v-if="showDebug" class="mt-4 p-3 text-xs text-gray-500 bg-gray-50 border border-gray-200 rounded-lg dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600">
           <p><strong>Codes autorisés :</strong> {{ allowedCodes.join(', ') }}</p>
           <p><strong>Bypass activé :</strong> {{ isBypassActive ? '✅ Oui déjà activé' : '❌Non, pas activé' }}</p>
-          <p><strong>VITE_ENABLE_BYPASS :</strong> {{ import.meta.env.VITE_ENABLE_BYPASS }}</p>
-          <p><strong>BASE_URL :</strong> {{ import.meta.env.BASE_URL }}</p>
-          <p><strong>Mode :</strong> {{ import.meta.env.MODE }}</p>
+          <p><strong>VITE_ENABLE_BYPASS :</strong> {{ envVars.VITE_ENABLE_BYPASS }}</p>
+          <p><strong>BASE_URL :</strong> {{ envVars.BASE_URL }}</p>
+          <p><strong>Mode :</strong> {{ envVars.MODE }}</p>
         </div>
       </form>
     </div>
@@ -70,6 +70,13 @@ const allowedCodes = computed(() => {
 const showDebug = computed(() => {
   return import.meta.env.DEV || import.meta.env.VITE_SHOW_DEBUG === 'true';
 });
+
+// Variables d'environnement pour le debug
+const envVars = computed(() => ({
+  VITE_ENABLE_BYPASS: import.meta.env.VITE_ENABLE_BYPASS,
+  BASE_URL: import.meta.env.BASE_URL,
+  MODE: import.meta.env.MODE
+}));
 
 function checkCode() {
   // Reset des états
