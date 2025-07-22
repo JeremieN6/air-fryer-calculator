@@ -10,10 +10,10 @@
                         🍗</span>
                 </RouterLink>
                 <div class="flex items-center lg:order-2">
-                    <RouterLink to="/#"
+                    <a href="mailto:contact@jeremiecode.fr"
                         class="inline-flex justify-center items-center py-3 px-5 text-white font-medium text-center rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                         Contact
-                    </RouterLink>
+                    </a>
                     <button @click="toggleMenu" type="button"
                         class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         :aria-expanded="isMenuOpen">

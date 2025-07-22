@@ -81,7 +81,7 @@
   <div class="text-center mb-6">
     <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Calculateur AirFryTime 🍗 • Résultat de cuisson personnalisé</h3>
   </div>
-  <h2 class="text-2xl font-bold mb-4">Résultat</h2>
+  <h2 class="text-gray-900 dark:text-white text-2xl font-bold mb-4">Résultat</h2>
   <div class="flex flex-col md:flex-row justify-center items-start md:items-center my-5 gap-5">
     <div class="block w-full md:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <p class="font-normal text-gray-700 dark:text-gray-400">Aliment</p>
@@ -134,19 +134,7 @@
     >
       📸 Télécharger en PNG
     </button>
-    <button
-      @click="telechargerPdf"
-      class="text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 text-center dark:text-blue-600 dark:hover:bg-blue-700 dark:hover:text-white transition"
-    >
-      📄 Télécharger en PDF
-    </button>
 
-    <button
-      @click="genererEtAfficherQrCode"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition"
-    >
-      📱 Partager le QR Code
-    </button>
   </div>
 </PremiumAuth>
 
@@ -208,10 +196,8 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 import PremiumAuth from './PremiumAuth.vue'
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf'
 import QRCode from 'qrcode'
 import { syncBypassFromStorage } from '../stores/bypass'
 
@@ -309,31 +295,7 @@ const telechargerPng = async () => {
   el.classList.remove('export-style') // ➖ suppression après capture
 }
 
-const telechargerPdf = async () => {
-  const [html2canvasModule, jsPDFModule] = await Promise.all([
-    import('html2canvas'),
-    import('jspdf')
-  ])
-  const html2canvas = html2canvasModule.default
-  const jsPDF = jsPDFModule.default
-  const el = exportElement.value
 
-  el.classList.add('export-style')
-  await nextTick()
-
-  if (!el) return alert("Élément non trouvé")
-  const canvas = await html2canvas(el, { scale: 2, useCORS: true })
-  const imgData = canvas.toDataURL('image/png')
-
-  const pdf = new jsPDF('p', 'mm', 'a4')
-  const pdfWidth = pdf.internal.pageSize.getWidth() - 20 // 10px de marge de chaque côté
-  const pdfHeight = (canvas.height * pdfWidth) / canvas.width
-
-  pdf.addImage(imgData, 'PNG', 10, 10, pdfWidth, pdfHeight)
-  pdf.save('resultat-cuisson-airfrytime.pdf')
-
-  el.classList.remove('export-style')
-}
 
 const telechargerQrCode = async () => {
   try {
@@ -353,18 +315,7 @@ const telechargerQrCode = async () => {
   }
 }
 
-const genererEtAfficherQrCode = async () => {
-  const baseUrl = window.location.origin + window.location.pathname
-  const qrParams = new URLSearchParams({
-    aliment: resultat.value.aliment,
-    temps: resultat.value.temps,
-    temperature: resultat.value.temperature,
-    preparation: resultat.value.preparation
-  })
-  const finalUrl = `${baseUrl}?${qrParams.toString()}`
-  qrCodeUrl.value = await QRCode.toDataURL(finalUrl)
-  showQr.value = true
-}
+
 
 onMounted(() => {
   // console.log('CuissonForm - Component mounted, syncing bypass state');

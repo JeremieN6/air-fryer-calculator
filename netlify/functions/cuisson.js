@@ -12,21 +12,57 @@ const allowedOrigins = [
 ];
 
 // Fonction pour vérifier si l'origine est autorisée
-function isOriginAllowed(origin, referer) {
+function isOriginAllowed(origin, referer, userAgent) {
+  // Log détaillé pour debug
+  console.log('CORS Check:', {
+    origin,
+    referer,
+    userAgent: userAgent ? userAgent.substring(0, 100) : 'none'
+  });
+
   // Vérifier l'origin d'abord
   if (origin && allowedOrigins.includes(origin)) {
+    console.log('✅ Origin autorisé:', origin);
     return true;
   }
 
   // Si pas d'origin (cas mobile), vérifier le referer
   if (referer) {
-    return allowedOrigins.some(allowedOrigin =>
+    const isRefererAllowed = allowedOrigins.some(allowedOrigin =>
       referer.startsWith(allowedOrigin)
     );
+    if (isRefererAllowed) {
+      console.log('✅ Referer autorisé:', referer);
+      return true;
+    }
+
+    // Vérification plus souple pour mobile
+    const isMobileRefererValid = allowedOrigins.some(allowedOrigin => {
+      const domain = allowedOrigin.replace('https://', '').replace('http://', '');
+      const contains = referer.includes(domain);
+      console.log(`Checking ${referer} contains ${domain}: ${contains}`);
+      return contains;
+    });
+    if (isMobileRefererValid) {
+      console.log('✅ Mobile referer autorisé:', referer);
+      return true;
+    }
+  }
+
+  // Mode debug temporaire : autoriser sassify.fr même avec des variations
+  if (referer && referer.includes('sassify.fr')) {
+    console.log('✅ Sassify.fr détecté dans referer:', referer);
+    return true;
   }
 
   // Fallback : autoriser si pas d'origin ni referer (certains cas mobiles)
-  return !origin && !referer;
+  if (!origin && !referer) {
+    console.log('✅ Pas d\'origin ni referer - autorisé');
+    return true;
+  }
+
+  console.log('❌ CORS bloqué');
+  return false;
 }
 
 exports.handler = async function(event) {
@@ -34,17 +70,20 @@ exports.handler = async function(event) {
   const referer = event.headers.referer;
 
   // Logging pour débugger les problèmes mobiles
+  const userAgent = event.headers['user-agent'] || '';
+  const isAllowed = isOriginAllowed(origin, referer, userAgent);
+
   console.log('Request details:', {
     method: event.httpMethod,
     origin: origin,
     referer: referer,
-    userAgent: event.headers['user-agent'],
-    isOriginAllowed: isOriginAllowed(origin, referer)
+    userAgent: userAgent,
+    isOriginAllowed: isAllowed
   });
 
   // Gestion des pré-requêtes CORS (OPTIONS)
   if (event.httpMethod === "OPTIONS") {
-    if (isOriginAllowed(origin, referer)) {
+    if (isAllowed) {
       return {
         statusCode: 200,
         headers: {
@@ -55,6 +94,7 @@ exports.handler = async function(event) {
         body: "",
       };
     } else {
+      console.log('CORS blocked for OPTIONS request');
       return {
         statusCode: 403,
         body: "Origin non autorisée",
@@ -113,7 +153,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": isOriginAllowed(origin, referer) ? (origin || "*") : "",
+        "Access-Control-Allow-Origin": isAllowed ? (origin || "*") : "",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ result }),
@@ -123,7 +163,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": isOriginAllowed(origin, referer) ? (origin || "*") : "",
+        "Access-Control-Allow-Origin": isAllowed ? (origin || "*") : "",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: "Erreur serveur" }),
